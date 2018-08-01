@@ -44,6 +44,12 @@ python CycleGAN.py
 **Left:** Input image. **Right:** Translated image
 
 #### Day 2 night
+<img src="./ReadMe/images/day2night_r_1.png" alt="drawing" width="200px"/>
+<img src="./ReadMe/images/day2night_s_1.png" alt="drawing" width="200px"/>
+</br>
+<img src="./ReadMe/images/day2night_r_2.png" alt="drawing" width="200px"/>
+<img src="./ReadMe/images/day2night_s_2.png" alt="drawing" width="200px"/>
+
 ![](./ReadMe/images/day2night_r_1.png?) ![](./ReadMe/images/day2night_s_1.png?)
 ![](./ReadMe/images/day2night_r_2.png?) ![](./ReadMe/images/day2night_s_2.png?)
 ![](./ReadMe/images/day2night_r_3.png?) ![](./ReadMe/images/day2night_s_3.png?)
