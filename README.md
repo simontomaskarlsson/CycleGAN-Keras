@@ -87,11 +87,11 @@ python CycleGAN.py
 </table>
 
 #### Day 2 night - gif
-<img src="./ReadMe/gifs/city_day2night_2_short.gif" alt="drawing" width="350px"/>
+<img src="./ReadMe/gifs/city_day2night_2_short.gif" alt="drawing" width="400px"/>
 
 #### Rainy 2 sunny - gif
-<img src="./ReadMe/gifs/highway_rainy2sunny2.gif" alt="drawing" width="350px"/>
+<img src="./ReadMe/gifs/highway_rainy2sunny2.gif" alt="drawing" width="400px"/>
 
 #### Sunny 2 rainy - gif
-<img src="./ReadMe/gifs/highway_sunny2rainy_2.gif" alt="drawing" width="350px"/>
+<img src="./ReadMe/gifs/highway_sunny2rainy_2.gif" alt="drawing" width="400px"/>
 ---
