@@ -94,4 +94,3 @@ python CycleGAN.py
 
 #### Sunny 2 rainy - gif
 <img src="./ReadMe/gifs/highway_sunny2rainy_2.gif" alt="drawing" width="400px"/>
----
