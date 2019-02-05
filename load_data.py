@@ -61,8 +61,7 @@ def create_image_array(image_list, image_path, nr_of_channels):
 
 
 def normalize_array(array):
-    max_value = max(array.flatten())
-    array = array / max_value
+    array = array / 127.5 - 1
     return array
 
 
