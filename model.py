@@ -269,11 +269,13 @@ class CycleGAN():
     def Rk(self, x0):
         k = int(x0.shape[-1])
         # first layer
-        x = Conv2D(filters=k, kernel_size=3, strides=1, padding='same')(x0)
+        x = ReflectionPadding2D((1,1))(x0)
+        x = Conv2D(filters=k, kernel_size=3, strides=1, padding='valid')(x)
         x = self.normalization(axis=3, center=True, epsilon=1e-5)(x, training=True)
         x = Activation('relu')(x)
         # second layer
-        x = Conv2D(filters=k, kernel_size=3, strides=1, padding='same')(x)
+        x = ReflectionPadding2D((1, 1))(x)
+        x = Conv2D(filters=k, kernel_size=3, strides=1, padding='valid')(x)
         x = self.normalization(axis=3, center=True, epsilon=1e-5)(x, training=True)
         # merge
         x = add([x, x0])
