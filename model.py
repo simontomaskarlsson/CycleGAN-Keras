@@ -6,7 +6,7 @@ from keras.optimizers import Adam
 from keras.backend import mean
 from keras.models import Model, model_from_json
 from keras.utils import plot_model
-from keras.engine.topology import Container
+from keras.engine.topology import Network
 
 from collections import OrderedDict
 from scipy.misc import imsave, toimage  # has depricated
@@ -112,9 +112,9 @@ class CycleGAN():
                          loss=self.lse,
                          loss_weights=loss_weights_D)
 
-        # Use containers to avoid falsy keras error about weight descripancies
-        self.D_A_static = Container(inputs=image_A, outputs=guess_A, name='D_A_static_model')
-        self.D_B_static = Container(inputs=image_B, outputs=guess_B, name='D_B_static_model')
+        # Use Networks to avoid falsy keras error about weight descripancies
+        self.D_A_static = Network(inputs=image_A, outputs=guess_A, name='D_A_static_model')
+        self.D_B_static = Network(inputs=image_B, outputs=guess_B, name='D_B_static_model')
 
         # ======= Generator model ==========
         # Do note update discriminator weights during generator training
@@ -269,11 +269,13 @@ class CycleGAN():
     def Rk(self, x0):
         k = int(x0.shape[-1])
         # first layer
-        x = Conv2D(filters=k, kernel_size=3, strides=1, padding='same')(x0)
+        x = ReflectionPadding2D((1,1))(x0)
+        x = Conv2D(filters=k, kernel_size=3, strides=1, padding='valid')(x)
         x = self.normalization(axis=3, center=True, epsilon=1e-5)(x, training=True)
         x = Activation('relu')(x)
         # second layer
-        x = Conv2D(filters=k, kernel_size=3, strides=1, padding='same')(x)
+        x = ReflectionPadding2D((1, 1))(x)
+        x = Conv2D(filters=k, kernel_size=3, strides=1, padding='valid')(x)
         x = self.normalization(axis=3, center=True, epsilon=1e-5)(x, training=True)
         # merge
         x = add([x, x0])
@@ -647,9 +649,6 @@ class CycleGAN():
             synthetic = synthetic[0]
             reconstructed = reconstructed[0]
 
-        synthetic = synthetic.clip(min=0)
-        reconstructed = reconstructed.clip(min=0)
-
         # Append and save
         if real_ is not None:
             if len(real_.shape) > 4:
@@ -661,7 +660,7 @@ class CycleGAN():
         if self.channels == 1:
             image = image[:, :, 0]
 
-        toimage(image, cmin=0, cmax=1).save(path_name)
+        toimage(image, cmin=-1, cmax=1).save(path_name)
 
     def saveImages(self, epoch, real_image_A, real_image_B, num_saved_images=1):
         directory = os.path.join('images', self.date_time)
@@ -843,8 +842,7 @@ class CycleGAN():
             def save_image(image, name, domain):
                 if self.channels == 1:
                     image = image[:, :, 0]
-                image = image.clip(min=0)
-                toimage(image, cmin=0, cmax=1).save(os.path.join(
+                toimage(image, cmin=-1, cmax=1).save(os.path.join(
                     'generate_images', 'synthetic_images', domain, name))
 
             # Test A images
