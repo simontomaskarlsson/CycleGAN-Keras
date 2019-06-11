@@ -681,23 +681,14 @@ class CycleGAN():
                 real_image_A = np.expand_dims(real_image_A, axis=0)
                 real_image_B = np.expand_dims(real_image_B, axis=0)
                 testString = 'test'
-                if self.channels == 1:  # Use the paired data for MR images
-                    real_image_Ab = self.B_test[0]
-                    real_image_Ba = self.A_test[0]
-                    real_image_Ab = np.expand_dims(real_image_Ab, axis=0)
-                    real_image_Ba = np.expand_dims(real_image_Ba, axis=0)
+                
             else:
                 #real_image_A = self.A_train[rand_A_idx[i]]
                 #real_image_B = self.B_train[rand_B_idx[i]]
                 if len(real_image_A.shape) < 4:
                     real_image_A = np.expand_dims(real_image_A, axis=0)
                     real_image_B = np.expand_dims(real_image_B, axis=0)
-                if self.channels == 1:  # Use the paired data for MR images
-                    real_image_Ab = real_image_B  # self.B_train[rand_A_idx[i]]
-                    real_image_Ba = real_image_A  # self.A_train[rand_B_idx[i]]
-                    real_image_Ab = np.expand_dims(real_image_Ab, axis=0)
-                    real_image_Ba = np.expand_dims(real_image_Ba, axis=0)
-
+                
             synthetic_image_B = self.G_A2B.predict(real_image_A)
             synthetic_image_A = self.G_B2A.predict(real_image_B)
             reconstructed_image_A = self.G_B2A.predict(synthetic_image_B)
