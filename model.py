@@ -187,9 +187,9 @@ class CycleGAN():
             print('--- Caching data ---')
         sys.stdout.flush()
 
-        if self.use_data_generator:
+        if self.use_data_generator:            
             self.data_generator = load_data.load_data(
-                nr_of_channels=self.batch_size, generator=True, subfolder=image_folder)
+                nr_of_channels=self.channels, batch_size=self.batch_size, generator=True, subfolder=image_folder)
 
             # Only store test images
             nr_A_train_imgs = 0
