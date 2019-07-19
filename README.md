@@ -74,7 +74,7 @@ parameter 'image_folder' in CycleGAN init function.
 
 3. Train a model by:
 ```
-python CycleGAN.py
+python model.py
 ```
 
 4. Generate synthetic images by following specifications under:
