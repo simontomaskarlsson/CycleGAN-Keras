@@ -80,8 +80,8 @@ def plotResultfromCSV(datetime, point_gap=1):
     R = butter_lowpass_filter(reconstruction_losses[points], cutoff, fs, order)
 
     fig_D = plt.figure(1)
-    plt.plot(GA, label='GB_losses')
-    plt.plot(GB, label='GA_losses')
+    plt.plot(GA, label='GA_losses')
+    plt.plot(GB, label='GB_losses')
     plt.ylabel('Generator losses')
     plt.legend()
 
