@@ -10,6 +10,7 @@ from keras.engine.topology import Network
 
 from collections import OrderedDict
 from scipy.misc import imsave, toimage  # has depricated
+from PIL import Image
 import numpy as np
 import random
 import datetime
@@ -672,8 +673,9 @@ class CycleGAN():
 
         if self.channels == 1:
             image = image[:, :, 0]
-
-        toimage(image, cmin=-1, cmax=1).save(path_name)
+        
+        image = image*(255)
+        Image.fromarray(image.astype('uint8')).save(path_name)
 
     def saveImages(self, epoch, real_image_A, real_image_B, num_saved_images=1):
         directory = os.path.join('images', self.date_time)
